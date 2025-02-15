@@ -1,47 +1,80 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import '../styles/about.css';
+import "../styles/about.css";
 
 const About = () => {
+  const [visibleCards, setVisibleCards] = useState([]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const cards = document.querySelectorAll(".support-item");
+      const windowHeight = window.innerHeight;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < windowHeight * 0.75) {
+          setVisibleCards((prev) => [...new Set([...prev, index])]);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="about-page">
       <Navbar />
       <main>
         <section className="about-hero">
-          <h1>Why StartupAI Exists</h1>
-          <p>Empowering solo founders with AI-driven support and guidance</p>
+          <div className="hero-content">
+            <h1>Why StartupAI Exists</h1>
+            <p>Empowering solo founders with AI-driven support and guidance</p>
+          </div>
         </section>
 
-        {/* <section className="mission-section">
-          <div className="container">
-            <h2>Our Mission</h2>
-            <p>We believe that great ideas shouldn&apos;t be limited by lack of resources or support. StartupAI was created to democratize access to high-quality business guidance through the power of artificial intelligence.</p>
-          </div>
-        </section> */}
-
+        
         <section className="how-it-works">
+        
           <div className="container">
             <h2>How AI Supports Your Journey</h2>
             <div className="support-grid">
-              <div className="support-item">
-                <h3>Validation</h3>
-                <p>AI analyzes market trends and validates business ideas with data-driven insights.</p>
-              </div>
-              <div className="support-item">
-                <h3>Scaling</h3>
-                <p>Get AI-powered recommendations for growth strategies and market expansion.</p>
-              </div>
-              <div className="support-item">
-                <h3>Fundraising</h3>
-                <p>AI assists in crafting compelling pitches and connecting with potential investors.</p>
-              </div>
-              <div className="support-item">
-                <h3>Networking</h3>
-                <p>Access AI-curated networking opportunities and industry connections.</p>
-              </div>
+              {[
+                {
+                  title: "Validation",
+                  content:
+                    "AI analyzes market trends, evaluates industry demand, and assesses competition to help you validate your business idea. It provides insights based on real-world data, ensuring your idea is viable before investing resources. You’ll receive risk analysis, feasibility studies, and market-fit assessments powered by AI-driven algorithms.",
+                },
+                {
+                  title: "Scaling",
+                  content:
+                    "Once your business is established, AI assists in scaling by providing growth strategies tailored to your industry. AI-powered analytics help optimize pricing models, expand customer reach, and suggest operational efficiencies. Whether it’s automating workflows, improving marketing efforts, or identifying new market segments, StartupAI ensures sustainable and data-backed growth.",
+                },
+                {
+                  title: "Fundraising",
+                  content:
+                    "AI streamlines your fundraising journey by analyzing successful pitch decks, identifying investor preferences, and crafting compelling proposals. It connects you with potential investors by matching your startup with relevant funding opportunities. AI also helps refine financial projections and business plans, making your pitch more persuasive and investment-ready.",
+                },
+                {
+                  title: "Networking",
+                  content:
+                    "StartupAI connects you with industry leaders, mentors, and like-minded entrepreneurs through AI-curated networking opportunities. By analyzing professional networks, AI suggests meaningful connections, helping you form partnerships and collaborations. It also recommends events, workshops, and accelerators relevant to your startup’s growth.",
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className={`support-item ${visibleCards.includes(index) ? "visible" : ""} ${index % 2 === 0 ? "slide-left" : "slide-right"}`}
+                >
+                  <h3>{item.title}</h3>
+                  <p>{item.content}</p>
+                </div>
+              ))}
             </div>
           </div>
+        
         </section>
+        
       </main>
       <Footer />
     </div>
