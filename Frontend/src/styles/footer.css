@@ -108,7 +108,7 @@
   color: inherit;
 }
 
-#footerlogosquare{
-    height: 170px;
-    width: auto;
+#footerlogosquare {
+  height: 80px;
+  width: 80px; 
 }
