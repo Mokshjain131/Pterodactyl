@@ -49,6 +49,10 @@ const SlidingCards = () => {
     return (
       <div>
         <Navbar />
+        <section className="about-hero">
+          <h1>Unlocking Startup Potential</h1>
+          <p>AI-powered solutions to guide solo founders from idea to execution.</p>
+        </section>
         <div id="Features">
             <div className="FeatureContainer">
                 {featuresLeft.map((feature, index) => (
