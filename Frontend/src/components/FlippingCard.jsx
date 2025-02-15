@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/flippingcard.css"; // Ensure correct path
+import "../styles/flippingcard.css"; 
 
 const FlippingCard = () => {
   return (
@@ -24,8 +24,9 @@ const FlippingCard = () => {
               
               {/* Chat Button */}
               <button className="flip-button" onClick={() => navigate("/chat")}>
-                Start Chat 💬
+                Start Chat 
               </button>
+              
             </div>
           </div>
         </div>
