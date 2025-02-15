@@ -1,84 +1,68 @@
 import React, { useState } from "react";
-import '../styles/login.css';
+import { useNavigate } from "react-router-dom"; // ✅ Correct import
+import "../styles/login.css";
 
-const Login = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
+function Login() {
+  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // For sign-up
-  const [error, setError] = useState(""); // For error handling
+  const [name, setName] = useState("");
+  const navigate = useNavigate(); // ✅ Replacing useRouter with useNavigate
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // Simulated API call
+    console.log(isLogin ? "Logging in..." : "Signing up...", { email, password, name });
 
-    if (isSignUp && password !== confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    setError(""); // Clear error
-    console.log(isSignUp ? "Creating account with:" : "Logging in with:", { email, password });
-    // Add login or signup logic here (API calls)
+    // ✅ Correct navigation method for React Router
+    navigate("/");
   };
 
   return (
-    <div className="login-container">
-      <h1>{isSignUp ? "Create Account" : "Login"}</h1>
-      
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
+    <div className="container">
+      <div className="background"></div>
+      <div className="formContainer">
+        <h1 className="title">{isLogin ? "Login" : "Sign Up"}</h1>
+        <form onSubmit={handleSubmit} className="form">
+          {!isLogin && (
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="input"
+              required
+            />
+          )}
           <input
             type="email"
-            id="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="input"
             required
-            placeholder="Enter your email"
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            id="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="input"
             required
-            placeholder="Enter your password"
           />
-        </div>
-
-        {isSignUp && (
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              placeholder="Re-enter your password"
-            />
-          </div>
-        )}
-
-        {error && <div className="error">{error}</div>}
-
-        <button type="submit">{isSignUp ? "Sign Up" : "Login"}</button>
-      </form>
-
-      <div className="toggle-link">
-        <p>
-          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-          <span onClick={() => setIsSignUp(!isSignUp)}>
-            {isSignUp ? "Login" : "Create Account"}
+          <button type="submit" className="button">
+            {isLogin ? "Login" : "Sign Up"}
+          </button>
+        </form>
+        <p className="toggleText">
+          {isLogin ? "Don't have an account? " : "Already have an account? "}
+          <span onClick={() => setIsLogin(!isLogin)} className="toggleLink">
+            {isLogin ? "Sign Up" : "Login"}
           </span>
         </p>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
