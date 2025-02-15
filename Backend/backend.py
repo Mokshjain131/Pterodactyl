@@ -89,7 +89,7 @@ Question: "What's the best fundraising strategy for a B2B startup?"
 Response: "For a B2B startup, focus on revenue-based funding or strategic angel investors. Create a strong sales pipeline before pitching VCs, as they prioritize revenue traction. Consider accelerators like Y Combinator if your product has high growth potential.""""
 )
 
-@app.post("/search/")
+@app.post("/ai/")
 async def search(userquery: Request):
     try:
         # Parse the incoming request
@@ -117,54 +117,62 @@ async def search(userquery: Request):
 async def login(request: Request):
     try:
         data = await request.json()
-        email = data.get("email")
-        password = data.get("password")
+        id_token = data.get("id_token")
 
-        if not email or not password:
-            raise HTTPException(status_code=400, detail="Email and password required")
+        if not id_token:
+            raise HTTPException(status_code=400, detail="ID token required")
 
-        # Query Supabase for user
-        result = supabase.table("users").select("*").eq("email", email).execute()
+        # Verify Google token with Supabase
+        auth_response = supabase.auth.sign_in_with_id_token({
+            "provider": "google",
+            "id_token": id_token
+        })
+
+        # Get user data
+        user = auth_response.user
+
+        # Check if user exists in our users table
+        result = supabase.table("users").select("*").eq("id", user.id).execute()
 
         if not result.data:
-            raise HTTPException(status_code=401, detail="Invalid credentials")
+            # Create new user entry if first time
+            result = supabase.table("users").insert({
+                "id": user.id,
+                "email": user.email,
+                "name": user.user_metadata.get("full_name"),
+                "avatar_url": user.user_metadata.get("avatar_url"),
+                "created_at": "now()"
+            }).execute()
 
-        # In production, you should properly hash and verify passwords
-        user = result.data[0]
-        if user["password"] != password:  # Replace with proper password verification
-            raise HTTPException(status_code=401, detail="Invalid credentials")
+        return {
+            "success": True,
+            "user": result.data[0],
+            "session": auth_response.session
+        }
 
-        return {"success": True, "user": user}
     except Exception as e:
-        logging.error(f"Login error: {e}")
+        logging.error(f"Google auth error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/signup/")
-async def signup(request: Request):
+async def refresh_session(request: Request):
     try:
         data = await request.json()
-        email = data.get("email")
-        password = data.get("password")
-        name = data.get("name")
+        refresh_token = data.get("refresh_token")
 
-        if not all([email, password, name]):
-            raise HTTPException(status_code=400, detail="All fields required")
+        if not refresh_token:
+            raise HTTPException(status_code=400, detail="Refresh token required")
 
-        # Check if user exists
-        existing = supabase.table("users").select("*").eq("email", email).execute()
-        if existing.data:
-            raise HTTPException(status_code=400, detail="Email already registered")
+        # Refresh the session
+        auth_response = supabase.auth.refresh_session(refresh_token)
 
-        # Create new user
-        result = supabase.table("users").insert({
-            "email": email,
-            "password": password,  # In production, hash this password
-            "name": name
-        }).execute()
+        return {
+            "success": True,
+            "session": auth_response.session
+        }
 
-        return {"success": True, "user": result.data[0]}
     except Exception as e:
-        logging.error(f"Signup error: {e}")
+        logging.error(f"Session refresh error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/pitch/generate/")
