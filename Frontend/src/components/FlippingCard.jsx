@@ -26,7 +26,6 @@ const FlippingCard = () => {
               <button className="flip-button" onClick={() => navigate("/chat")}>
                 Start Chat 
               </button>
-              
             </div>
           </div>
         </div>
