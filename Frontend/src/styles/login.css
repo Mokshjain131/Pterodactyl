@@ -1,0 +1,73 @@
+/* login.css */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 64px); /* Adjusting for the navbar height */
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 64px; /* To prevent overlap with fixed navbar */
+  }
+  
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff4b5c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e03e49;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .toggle-link {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .toggle-link span {
+    color: #ff4b5c;
+    cursor: pointer;
+  }
+  

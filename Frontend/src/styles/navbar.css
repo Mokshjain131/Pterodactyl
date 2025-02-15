@@ -1,46 +1,96 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-}
-
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-}
-
+/* Navbar Styling */
 .navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: #1a1a2e;
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
+/* Logo Styling */
 .navbar-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
+    font-size: 24px;
+    color: #ff4b5c;
+    margin-left: 20px;
 }
 
-.navbar-menu {
-    display: flex;
+/* Navigation Links */
+.navbar-links {
     list-style: none;
+    display: flex;
+    justify-content: space-evenly; 
 }
 
-.navbar-link {
-    color: #fff;
+/* Styling for Each Link */
+.navbar-links li {
+    display: inline-block;
+    width: 111px; /* Set the width of the inline-block element */
+}
+
+/* Styling for Navbar Links */
+.navbar-links a {
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 8px 8px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
-.navbar-link:hover {
-    text-decoration: underline;
+/* Hover Effect */
+.navbar-links a:hover {
+    background: #ff4b5c;
+    color: white;
+}
+
+/* Active Link Style */
+.navbar-links a.active {
+    background: #ff4b5c;
+}
+
+/* Mobile Responsive Styles */
+.navbar-menu-icon {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background: #1a1a2e;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .navbar-links-active {
+        display: flex;
+    }
+
+    .navbar-links li {
+        padding: 10px 0;
+    }
+
+    .navbar-links a {
+        display: block;
+        padding: 12px;
+    }
+
+    .navbar-menu-icon {
+        display: block;
+    }
 }

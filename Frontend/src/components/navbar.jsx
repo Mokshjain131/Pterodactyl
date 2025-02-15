@@ -1,39 +1,32 @@
-// import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import '../styles/navbar.css';
+import "../styles/navbar.css";
 
-function Navbar() {
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    return (
-        <nav className="navbar">
-            <div className="navbar-container">
-                <Link to="/" className="navbar-logo">
-                    <img src="../assets/react.svg" alt="Logo" />
-                </Link>
-                <ul className="navbar-menu">
-                    <li>
-                        <Link to="/" className="navbar-link">
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/chat" className="navbar-link">
-                            Chat
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/login" className="navbar-link">
-                            Login
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    )
-}
+  return (
+    <nav className="navbar-container">
+      <div className="navbar-logo">StartupAI</div>
+
+      {/* Hamburger Menu */}
+      <div className="navbar-menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+        &#9776;
+      </div>
+
+      {/* Navigation Links */}
+      <ul className={`navbar-links ${menuOpen ? "navbar-links-active" : ""}`}>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/features">Features</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/investors">Investors</Link></li>
+        <li><Link to="/chat">Chat</Link></li>
+        <li><Link to="/cofounder">Co-founder</Link></li>
+        <li><Link to="/login">Login</Link></li>
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;
-
-
-
-
