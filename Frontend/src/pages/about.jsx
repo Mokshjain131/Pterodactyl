@@ -12,12 +12,12 @@ const About = () => {
           <p>Empowering solo founders with AI-driven support and guidance</p>
         </section>
 
-        <section className="mission-section">
+        {/* <section className="mission-section">
           <div className="container">
             <h2>Our Mission</h2>
             <p>We believe that great ideas shouldn&apos;t be limited by lack of resources or support. StartupAI was created to democratize access to high-quality business guidance through the power of artificial intelligence.</p>
           </div>
-        </section>
+        </section> */}
 
         <section className="how-it-works">
           <div className="container">
