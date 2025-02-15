@@ -1,7 +1,7 @@
 /* Full-width section */
 .full-width-section {
     width: 100vw;
-    height: 50vh;
+    height: 45vh;
     position: relative;
     display: flex;
     justify-content: center;
@@ -10,10 +10,10 @@
 
 /* Full-width static strip */
 .strip {
-    margin-top: 70px;
+    margin-top: 50px;
     position: absolute;
     width: 100%;
-    height: 500px;
+    height: 440px;
     background-color: blue;
     top: 50%;
     transform: translateY(-50%);
@@ -50,7 +50,7 @@
 
 /* Flipping card with fixed width */
 .flip-card {
-    margin-top: 30px;
+    margin-top: 100px;
     width: 300px !important; /* ✅ Change width here */
     height: 350px;
     position: relative;
@@ -94,42 +94,49 @@
 
 /* Ensure text and button on the back side are properly visible */
 .flip-card-back {
-    background: yellow;
-    color: black;  /* ✅ Make text readable */
+    background: #282846;
+    color: white;  /* ✅ Make text readable */
     transform: rotateY(180deg);
     transform: rotateY(180deg) scaleX(-1);
     backface-visibility: hidden;  /* ✅ Prevent mirror effect */
-
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    text-align: center; /* ✅ Ensures text is centered */
+    font-size: 20px; /* ✅ Adjusted font size */
+    font-weight: 500;
 }
 
+/* Button styling */
 .flip-button {
-    margin-top: 20px; /* ✅ Moves button lower */
-    padding: 10px 20px;
+    margin-top: 30px; /* ✅ Moved button slightly lower */
+    padding: 12px 28px;
     font-size: 18px;
     font-weight: bold;
     border: none;
     border-radius: 8px;
-    background-color: #ff4b5c; /* ✅ Red button */
+    background-color: #1a1a2e; /* ✅ Dark blue button */
     color: white;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .flip-button:hover {
-    background-color: #e03e4d; /* ✅ Darker red on hover */
+    background-color: #ff4b5c; /* ✅ Matches navbar hover */
+    transform: scale(1.1);
 }
 
 /* Ensure front side remains visible until flipped */
 .flip-card-front {
-    background: #ff4b5c;
+    background: #282846;
     color: white;
     backface-visibility: hidden;  /* ✅ Hide front when flipped */
+    text-align: center; /* ✅ Ensures text is centered */
+    font-size: 18px; /* ✅ Adjusted font size */
+    font-weight: 500;
 }
 
 /* Ensure inner wrapper flips correctly */

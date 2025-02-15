@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/footer.css";
+import logo from "../assets/StartUPAi_logo_box.png";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
-          <h3>StartupAI</h3>
-          <p>Your AI Co-Founder: Smart Support for Solo Entrepreneurs</p>
+        <img src={logo} alt="logo" id="footerlogosquare" />
         </div>
         
         <div className="footer-section">

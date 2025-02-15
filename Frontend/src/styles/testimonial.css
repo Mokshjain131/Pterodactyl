@@ -85,6 +85,8 @@
     padding: 5px;
 }
 #CarouselParent{
+    padding-top: 80px;
+    margin-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
