@@ -1,0 +1,147 @@
+/* Full-width section */
+.full-width-section {
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Full-width static strip */
+.strip {
+    margin-top: 70px;
+    position: absolute;
+    width: 100%;
+    height: 500px;
+    background-color: blue;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background: linear-gradient(270deg, #1a1a2e, #282846, #1a1a2e);
+    background-size: 400% 400%;
+    animation: shimmer 6s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+
+/* Centered flipping card */
+.card-container {
+    position: absolute;
+    z-index: 2;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Flipping card with fixed width */
+.flip-card {
+    margin-top: 30px;
+    width: 300px !important; /* ✅ Change width here */
+    height: 350px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    display: flex; /* ✅ Ensure content respects the width */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.flip-card:hover {
+    transform: rotateY(180deg);
+}
+
+/* Inner wrapper */
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative; /* ✅ Fix: Changed from absolute */
+    transform-style: preserve-3d;
+}
+
+/* Front and back of the card */
+.flip-card-front,
+.flip-card-back {
+    width: 100% !important; /* ✅ Ensure width is inherited */
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Ensure text and button on the back side are properly visible */
+.flip-card-back {
+    background: yellow;
+    color: black;  /* ✅ Make text readable */
+    transform: rotateY(180deg);
+    transform: rotateY(180deg) scaleX(-1);
+    backface-visibility: hidden;  /* ✅ Prevent mirror effect */
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.flip-button {
+    margin-top: 20px; /* ✅ Moves button lower */
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff4b5c; /* ✅ Red button */
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.flip-button:hover {
+    background-color: #e03e4d; /* ✅ Darker red on hover */
+}
+
+/* Ensure front side remains visible until flipped */
+.flip-card-front {
+    background: #ff4b5c;
+    color: white;
+    backface-visibility: hidden;  /* ✅ Hide front when flipped */
+}
+
+/* Ensure inner wrapper flips correctly */
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+/* Fix rotation logic */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);  /* ✅ Flips entire inner section */
+}

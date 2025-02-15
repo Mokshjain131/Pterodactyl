@@ -1,6 +1,7 @@
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Testimonial from "../components/testimonial";
+import FlippingCard from "../components/FlippingCard";
 import '../styles/index.css';
 
 function Index() {
@@ -36,7 +37,7 @@ function Index() {
             </div>
           </div>
         </section>
-
+        <FlippingCard />
         <Testimonial />
       </main>
       <Footer />
