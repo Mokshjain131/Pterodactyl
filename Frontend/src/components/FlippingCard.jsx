@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/flippingcard.css"; 
 
 const FlippingCard = () => {
@@ -23,9 +24,9 @@ const FlippingCard = () => {
               <p>Instant guidance, smart strategies, and growth insights.</p>
               
               {/* Chat Button */}
-              <button className="flip-button" onClick={() => navigate("/chat")}>
+              <Link to="/chat"><button className="flip-button">
                 Start Chat 
-              </button>
+              </button></Link>
             </div>
           </div>
         </div>
