@@ -1,129 +1,53 @@
-.features-page {
-  min-height: 100vh;
+
+#Features{
+  padding: 20px;
+  margin: 0px;
+}
+
+.FeatureContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 
-main {
-  flex: 1;
-}
-
-.features-hero {
-  background: linear-gradient(135deg, #1a2a6c, #b21f1f);
-  color: white;
-  padding: 6rem 2rem;
-  text-align: center;
-}
-
-.features-hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
-
-.features-hero p {
-  font-size: 1.25rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.features-grid-section {
-  padding: 4rem 0;
-  background-color: #f8f9fa;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
+.cardL, .cardR {
+  width: 230px;
+  height: 300px;
   background: white;
-  padding: 2rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3),
+              0px 6px 20px rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+
+  opacity: 0;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Left slide-in */
+.cardL {
+  transform: translateX(-50px);
+}
+
+.cardtitle{
   text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-}
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.feature-card p {
-  color: #666;
-  line-height: 1.6;
-}
-
-.features-cta {
-  padding: 6rem 2rem;
-  text-align: center;
-  background-color: #2c3e50;
-  color: white;
-}
-
-.features-cta h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.features-cta p {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: #3498db;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
+  font-size: 18px;
   font-weight: bold;
-  transition: transform 0.3s ease;
+  margin: 5px;
+}
+/* Right slide-in */
+.cardR {
+  transform: translateX(50px);
 }
 
-.cta-button:hover {
-  transform: translateY(-2px);
+/* Apply visible class */
+.cardL.visible, .cardR.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-@media (max-width: 768px) {
-  .features-hero h1 {
-    font-size: 2rem;
-  }
-  
-  .features-hero p {
-    font-size: 1.1rem;
-  }
-  
-  .features-cta h2 {
-    font-size: 2rem;
-  }
-  
-  .features-cta p {
-    font-size: 1.1rem;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
+.cardtext{
+  text-align: left;
+  font-size: 15px;
+  margin: 5px;
+  margin-top: 10px;
 }

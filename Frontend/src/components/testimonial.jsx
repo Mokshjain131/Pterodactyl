@@ -6,7 +6,7 @@ import "../styles/testimonial.css";
 const Testimonial = () => {
     const [index, setIndex] = useState(0);
     const slides = [
-        { title: "\"Absolutely brilliant. A masterpiece of modern AI.\"", sub: "The Times" },
+        { title: "\"Absolutely brilliant. A true masterpiece of modern AI.\"", sub: "The Times" },
         { title: "\"This sets a new standard for online experiences.\"", sub: "Forbes" },
         { title: "\"Sleek, intuitive, and game-changing.\"", sub: "TechCrunch" },
         { title: "\"A seamless blend of beauty and functionality.\"", sub: "The Wall Street Journal" }
@@ -26,7 +26,7 @@ const Testimonial = () => {
 
     return (
         <div id="CarouselParent">
-            <div id="CarouselTestimonial">What They Say</div>
+            <div id="CarouselTestimonial"><h3>What They Say</h3></div>
             <div className="CarouselWrapper">
                 <button className="CarouselBtn Prev" onClick={() => moveSlide(-1)}>&#10094;</button>
                 <div className="CarouselContainer">

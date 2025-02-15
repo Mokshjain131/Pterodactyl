@@ -2,79 +2,77 @@
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import '../styles/features.css';
+import React, { useEffect, useRef } from "react";
 
-function Features() {
-  const features = [
+const featuresLeft = [
     {
-      id: 1,
-      title: "Validate Business Ideas",
-      description: "AI analyzes market feasibility, competition, and potential challenges to validate your startup idea.",
-      icon: "🎯"
+        title: "AI-Powered Idea Validation",
+        text: "Get instant feedback on your startup idea with AI-driven market analysis, competitor insights, and customer demand assessment."
     },
     {
-      id: 2,
-      title: "Strategic Advice",
-      description: "Get AI-powered insights for growth hacking and go-to-market strategies.",
-      icon: "💡"
+        title: "Smart Business Strategy",
+        text: "Leverage AI-generated strategic advice tailored to your industry, helping you navigate product development, business models, and growth strategies."
     },
     {
-      id: 3,
-      title: "Fundraising Support",
-      description: "AI helps craft compelling pitches and connects you with potential investors.",
-      icon: "💰"
-    },
-    {
-      id: 4,
-      title: "Proactive Support",
-      description: "AI acts as your business mentor, providing guidance when you need it most.",
-      icon: "🤝"
-    },
-    {
-      id: 5,
-      title: "Scaling & Automation",
-      description: "Optimize your workflow with AI-driven automation and scaling strategies.",
-      icon: "📈"
+        title: "Product Development Support",
+        text: "From MVP planning to feature prioritization, AI assists with technical decision-making, no-code/low-code solutions, and development roadmaps."
     }
-  ];
+];
 
-  return (
-    <div className="features-page">
-      <Navbar />
-      <main>
-        <section className="features-hero">
-          <h1>AI-Powered Features</h1>
-          <p>Everything you need to succeed as a solo founder</p>
-        </section>
+const featuresRight = [
+    { title: "Co-Founder & Mentor Matching", text: "Connect with co-founders, mentors, and advisors who complement your skills and vision." },
+    { title: "Fundraising & Investor Insights", text: "AI helps refine your pitch, generate business plans, and connect with relevant investors." },
+    { title: "Marketing & Growth Playbook", text: "AI suggests data-driven marketing strategies, content plans, and customer engagement tactics." }
+];
 
-        <section className="features-grid-section">
-          <div className="container">
-            <div className="features-grid">
-              {features.map((feature) => (
-                <div key={feature.id} className="feature-card">
-                  <div className="feature-icon">{feature.icon}</div>
-                  <h3>{feature.title}</h3>
-                  <p>{feature.description}</p>
-                </div>
-              ))}
+const SlidingCards = () => {
+    const cardsRef = useRef([]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        entry.target.style.transitionDelay = `${index * 0.2}s`;
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+
+        cardsRef.current.forEach((card) => observer.observe(card));
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+      <div>
+        <Navbar />
+        <div id="Features">
+            <div className="FeatureContainer">
+                {featuresLeft.map((feature, index) => (
+                    <div key={index} className="cardL" ref={(el) => (cardsRef.current[index] = el)}>
+                        <div className="cardtitle">{feature.title}</div>
+                        <div className="cardtext">{feature.text}</div>
+                    </div>
+                ))}
             </div>
-          </div>
-        </section>
 
-        <section className="features-cta">
-          <div className="container">
-            <h2>Ready to Start Your Journey?</h2>
-            <p>Get AI-powered support for your startup today</p>
-            <a href="/chat" className="cta-button">Try AI Chat Now</a>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
-  );
-}
+            <br /><br />
 
-export default Features;
+            <div className="FeatureContainer">
+                {featuresRight.map((feature, index) => (
+                    <div key={index} className="cardR" ref={(el) => (cardsRef.current[index + featuresLeft.length] = el)}>
+                        <div className="cardtitle">{feature.title}</div>
+                        <div className="cardtext">{feature.text}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+        <Footer />
+      </div>
+    );
+};
 
-
-
-
+export default SlidingCards;
