@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Correct import
 import "../styles/login.css";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -19,6 +21,8 @@ function Login() {
   };
 
   return (
+    <div>
+      <Navbar />
     <div className="container">
       <div className="background"></div>
       <div className="formContainer">
@@ -61,6 +65,8 @@ function Login() {
           </span>
         </p>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }

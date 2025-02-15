@@ -59,3 +59,55 @@
     margin-bottom: 2rem;
   }
 }
+
+#FooterSocials {
+  display: flex;
+  margin-top: 45px;
+}
+
+
+.FooterIconGrid {
+  display: grid;
+  grid-template-columns: repeat(6, auto); /* 3 columns */
+  grid-template-rows: repeat(1, auto); /* 2 rows */
+  gap: 25px;
+  justify-items: center;
+  align-items: center;
+}
+
+
+.FooterIconGrid svg {
+  width: 25px;
+  height: 25px;
+  fill: #578FCA;
+  border-radius: 8px; /* Slightly rounded corners for a modern look */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3),
+              0px 6px 20px rgba(255, 255, 255, 0.1); /* Soft blended shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+
+.FooterIconGrid svg:hover {
+  transform: scale(1.2);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4),
+              0px 8px 25px rgba(255, 255, 255, 0.15);
+}
+
+
+.FooterIconContainer {
+  background: #333;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.7s ease;
+}
+
+
+.FooterIconContainer > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
