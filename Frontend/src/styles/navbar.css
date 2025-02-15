@@ -1,4 +1,4 @@
-/* Navbar Styling */
+
 .navbar-container {
     position: relative;
     top: 0;
@@ -8,33 +8,31 @@
     background: #1a1a2e;
     color: white;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
-/* Logo Styling */
 .navbar-logo {
     font-size: 24px;
     color: #ff4b5c;
     margin-left: 20px;
 }
 
-/* Navigation Links */
 .navbar-links {
     list-style: none;
     display: flex;
     justify-content: space-evenly; 
 }
 
-/* Styling for Each Link */
+
 .navbar-links li {
     display: inline-block;
-    width: 111px; /* Set the width of the inline-block element */
+    width: 111px; 
 }
 
-/* Styling for Navbar Links */
 .navbar-links a {
     text-decoration: none;
     color: white;
@@ -45,18 +43,15 @@
     transition: all 0.3s ease-in-out;
 }
 
-/* Hover Effect */
 .navbar-links a:hover {
     background: #ff4b5c;
     color: white;
 }
 
-/* Active Link Style */
 .navbar-links a.active {
     background: #ff4b5c;
 }
 
-/* Mobile Responsive Styles */
 .navbar-menu-icon {
     display: none;
     font-size: 30px;
