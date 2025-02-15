@@ -1,66 +1,96 @@
-/* login.css */
 .login-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 64px); /* Adjusting for the navbar height */
+    min-height: calc(100vh - 64px);
+    margin-top: 64px; /* to ensure we don't overlap the navbar */
+    /* Example: a gradient background */
+    background: linear-gradient(135deg, #3a3a3a, #0000ff); 
     padding: 20px;
-    background: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 64px; /* To prevent overlap with fixed navbar */
+    box-sizing: border-box;
   }
   
-  h1 {
+  /* 
+    The card that sits in the middle.
+    We'll use a glass morphism style, 
+    but you can switch to a solid color if you prefer.
+  */
+  .login-card {
+    width: 250px;              /* smaller width so it's more centered/narrow */
+    max-width: 90%;            /* responsiveness on smaller screens */
+    padding: 20px;
+    border-radius: 12px;
+    /* Glass morphism: semi-transparent with a blur backdrop */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    /* Make text white so it’s visible on the glass background */
+    color: #fff;
+  }
+  
+  /* Headline (Login / Create Account) */
+  .login-card h1 {
     text-align: center;
-    color: #1a1a2e;
     margin-bottom: 20px;
+    color: #fff; /* ensure it stands out */
   }
   
+  /* Form groups */
   .form-group {
     margin-bottom: 15px;
     width: 100%;
-    max-width: 400px;
   }
   
+  /* Labels */
   label {
     display: block;
     font-weight: bold;
-    color: #333;
+    margin-bottom: 5px;
+    color: #fff; /* white text for contrast */
   }
   
+  /* Inputs */
   input {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    /* Slightly transparent input background for the glass effect */
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff; /* White text to contrast with the background */
+    outline: none;
+    margin-top: 5px;
   }
   
+  /* Button styling */
   button {
     width: 100%;
     padding: 12px;
     background-color: #ff4b5c;
     border: none;
     border-radius: 5px;
-    color: white;
+    color: #fff;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
   }
   
   button:hover {
     background-color: #e03e49;
   }
   
+  /* Error message styling */
   .error {
-    color: red;
+    color: #ff0000;
     font-size: 14px;
     text-align: center;
     margin-bottom: 10px;
   }
   
+  /* Toggle link styling */
   .toggle-link {
     text-align: center;
     margin-top: 15px;
@@ -69,5 +99,11 @@
   .toggle-link span {
     color: #ff4b5c;
     cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  
+  .toggle-link span:hover {
+    color: #e03e49;
   }
   
