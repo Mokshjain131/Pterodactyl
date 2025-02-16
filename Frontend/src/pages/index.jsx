@@ -20,7 +20,7 @@ function Index() {
             </div>
           </div>
         </section>
-        <div className="divider"></div>
+        
         <section className="features-preview">
           <h2>How AI Empowers Your Journey</h2>
           <div className="features-grid">
@@ -38,12 +38,10 @@ function Index() {
             </div>
           </div>
         </section>
-        <div className="divider"></div>
 
         <FlippingCard />
         
         <Testimonial />
-        <div className="divider"></div>
       </main>
       <Footer />
     </div>
