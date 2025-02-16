@@ -57,9 +57,9 @@ const About = () => {
                     "AI streamlines your fundraising journey by analyzing successful pitch decks, identifying investor preferences, and crafting compelling proposals. It connects you with potential investors by matching your startup with relevant funding opportunities. AI also helps refine financial projections and business plans, making your pitch more persuasive and investment-ready.",
                 },
                 {
-                  title: "Networking",
+                  title: "Strategic Analysis",
                   content:
-                    "StartupAI connects you with industry leaders, mentors, and like-minded entrepreneurs through AI-curated networking opportunities. By analyzing professional networks, AI suggests meaningful connections, helping you form partnerships and collaborations. It also recommends events, workshops, and accelerators relevant to your startup’s growth.",
+                    "StartupAI provides data-driven strategic analysis to help solo founders make informed decisions. By leveraging AI-powered insights, it evaluates market trends, competitor strategies, and growth opportunities tailored to your business. It also suggests optimal pricing models, positioning tactics, and expansion strategies to maximize your startup’s potential.",
                 },
               ].map((item, index) => (
                 <div

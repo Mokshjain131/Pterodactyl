@@ -20,7 +20,7 @@ const featuresLeft = [
 ];
 
 const featuresRight = [
-    { title: "Co-Founder & Mentor Matching", text: "Connect with co-founders, mentors, and advisors who complement your skills and vision." },
+    { title: "AI-Powered Market Research", text: "Gain data-driven insights into market trends, customer preferences, and competitor analysis to refine your business strategy." },
     { title: "Fundraising & Investor Insights", text: "AI helps refine your pitch, generate business plans, and connect with relevant investors." },
     { title: "Marketing & Growth Playbook", text: "AI suggests data-driven marketing strategies, content plans, and customer engagement tactics." }
 ];
