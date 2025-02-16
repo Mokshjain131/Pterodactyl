@@ -184,7 +184,7 @@ async def generate_pitch(request: Request):
         if not business_info:
             raise HTTPException(status_code=400, detail="Business info required")
 
-        prompt = f"""Generate a compelling pitch deck outline for the following business:
+        prompt = f"""Generate a compelling pitch deck outline for the following business, the response should be 150 words or less dont exceed that limit, MAKE SURE THE RESPONSE IS 150 WORDS OR LESSER, IT CANNOT EXCEED 150 WORDS AT ALL IT IS ABSOLUTELY IMPORTANT THAT IT IS LESS THAN 150 WORDS:
         {business_info}
 
         Include the following sections:
@@ -192,11 +192,10 @@ async def generate_pitch(request: Request):
         2. Solution
         3. Market Opportunity
         4. Business Model
-        5. Competition
-        6. Traction
-        7. Team
-        8. Financial Projections
-        9. Ask
+        5. Financial Projections
+
+        (the response should be 150 words or less) dont exceed that limit
+        don't mention keeping it under 150 words in the response
         """
 
         response = model.generate_content(prompt)
@@ -292,24 +291,13 @@ async def validate_idea(request: Request):
 async def review_pitch(request: Request):
     try:
         data = await request.json()
-        pitch_id = data.get("pitch_id")
+        pitch_content = data.get("pitch_content")
 
-        if not pitch_id:
-            raise HTTPException(status_code=400, detail="Pitch ID required")
+        if not pitch_content:
+            raise HTTPException(status_code=400, detail="Pitch content required")
 
-        # Note: In a real application, you'd want to store and retrieve the original pitch
-        # For now, we'll assume the pitch content is passed in the request
-        prompt = f"""Review and provide detailed feedback on this pitch:
-        {pitch_id}  # In practice, you'd use the actual pitch content here
-
-        Provide feedback on:
-        1. Clarity and Structure
-        2. Value Proposition
-        3. Market Analysis
-        4. Financial Projections
-        5. Areas for Improvement
-        6. Overall Impression"""
-
+        # Generate review for the pitch
+        prompt = f"Review and provide detailed feedback on this pitch: {pitch_content} MAKE SURE THE RESPONSE IS 200 WORDS OR LESSER, IT CANNOT EXCEED 200 WORDS AT ALL IT IS ABSOLUTELY IMPORTANT THAT IT IS LESS THAN 200 WORDS don't mention keeping it under 200 words in the response"
         response = model.generate_content(prompt)
         review = response.text
 
@@ -325,20 +313,13 @@ async def review_pitch(request: Request):
 async def match_investors(request: Request):
     try:
         data = await request.json()
-        pitch_id = data.get("pitch_id")
+        pitch_content = data.get("pitch_content")
 
-        if not pitch_id:
-            raise HTTPException(status_code=400, detail="Pitch ID required")
+        if not pitch_content:
+            raise HTTPException(status_code=400, detail="Pitch content required")
 
-        # Note: In a real application, you'd want to store and retrieve the original pitch
-        prompt = f"""Based on this pitch ID {pitch_id}:
-        Analyze and suggest matching criteria for ideal investors including:
-        1. Industry focus
-        2. Investment stage
-        3. Typical check size
-        4. Geographic preferences
-        5. Key value-adds needed"""
-
+        # Generate investor matchmaking tips based on the pitch
+        prompt = f"Based on this pitch content: {pitch_content}, suggest ideal investors including their industry focus, investment stage, typical check size, geographic preferences, and key value-adds needed. (the response should be 200 words or less) dont exceed that limit,MAKE SURE THE RESPONSE IS 200 WORDS OR LESSER, IT CANNOT EXCEED 200 WORDS AT ALL IT IS ABSOLUTELY IMPORTANT THAT IT IS LESS THAN 200 WORDS don't mention keeping it under 200 words in the response"
         response = model.generate_content(prompt)
         matching_criteria = response.text
 

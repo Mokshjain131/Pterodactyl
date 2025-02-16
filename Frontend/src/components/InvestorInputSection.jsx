@@ -1,9 +1,117 @@
 import React, { useState } from "react";
 import "../styles/investorInputSection.css";
 
-function InvestorInputSection() {
+function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMatches }) {
   const [businessIdea, setBusinessIdea] = useState("");
-  const [pitch, setPitch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [pitch, setPitch] = useState(null);
+  const [review, setReview] = useState(null);
+  const [investorMatches, setInvestorMatches] = useState(null);
+  const [inputPitch, setInputPitch] = useState("");
+
+  const generatePitch = async () => {
+    if (!businessIdea) {
+      console.log("Business idea is empty.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:8000/pitch/generate/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          business_info: businessIdea,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Response from backend:", data); // Log the response
+
+      if (data.success) {
+        // Remove '*' characters using regex
+        const cleanedPitch = data.pitch.replace(/\*/g, '');
+        setPitch(cleanedPitch);
+        onPitchGenerated(cleanedPitch); // Notify parent component
+      } else {
+        console.error("Failed to generate pitch:", data); // Log failure
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const reviewPitch = async () => {
+    if (!inputPitch) return;
+
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:8000/pitch/review/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          pitch_content: inputPitch,
+          business_info: businessIdea,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Response from backend:", data); // Log the response
+
+      if (data.success) {
+        // Remove '*' characters using regex
+        const cleanedReview = data.review.replace(/\*/g, '');
+        setReview(cleanedReview);
+        onReviewReceived(cleanedReview); // Notify parent component
+      } else {
+        console.error("Failed to review pitch:", data); // Log failure
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const findInvestors = async () => {
+    if (!inputPitch) return;
+
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:8000/match_investors/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          pitch_content: inputPitch,
+          business_info: businessIdea,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Response from backend:", data); // Log the response
+
+      if (data.success) {
+        // Remove '*' characters using regex
+        const cleanedMatches = data.matching_criteria.replace(/\*/g, '');
+        setInvestorMatches(cleanedMatches);
+        onInvestorMatches(cleanedMatches); // Notify parent component
+      } else {
+        console.error("Failed to find investors:", data); // Log failure
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="investor-input-container">
@@ -16,31 +124,55 @@ function InvestorInputSection() {
           onChange={(e) => setBusinessIdea(e.target.value)}
           className="business-input"
         />
+        <button
+          onClick={generatePitch}
+          disabled={loading || !businessIdea}
+          className="generate-pitch-button"
+        >
+          {loading ? 'Generating...' : 'Generate Pitch'}
+        </button>
       </div>
 
       {/* AI Generated Pitch Display */}
       <div className="ai-pitch-section">
-        <p>AI generated pitch for that idea</p>
+        {pitch && <p>{pitch}</p>}
       </div>
 
-      {/* Input Your Pitch */}
-      <div className="input-section">
-        <textarea
-          placeholder="Enter your pitch"
-          value={pitch}
-          onChange={(e) => setPitch(e.target.value)}
-          className="pitch-input"
+      {/* Input for Pitch Review and Investor Matching */}
+      <div className="input-pitch-section">
+        <input
+          type="text"
+          placeholder="Enter your pitch for review and matching"
+          value={inputPitch}
+          onChange={(e) => setInputPitch(e.target.value)}
+          className="input-pitch"
         />
+        <div className="action-buttons">
+          <button
+            onClick={reviewPitch}
+            disabled={loading || !inputPitch}
+            className="review-pitch-button"
+          >
+            {loading ? 'Reviewing...' : 'Get Expert Review'}
+          </button>
+          <button
+            onClick={findInvestors}
+            disabled={loading || !inputPitch}
+            className="find-investors-button"
+          >
+            {loading ? 'Finding...' : 'Find Investors'}
+          </button>
+        </div>
       </div>
 
-      {/* Pitch Review and Investor Matching */}
-      <div className="grid-section">
-        <div className="pitch-review">
-          <p>Pitch Review</p>
-        </div>
-        <div className="investor-matching">
-          <p>Investor Matchmaking</p>
-        </div>
+      {/* Pitch Review Display */}
+      <div className="pitch-review">
+        {review && <p>{review}</p>}
+      </div>
+
+      {/* Investor Matching Display */}
+      <div className="investor-matching">
+        {investorMatches && <p>{investorMatches}</p>}
       </div>
     </div>
   );
