@@ -233,60 +233,6 @@ async def validate_idea(request: Request):
         logging.error(f"Idea validation error: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
-# @app.post("/summarize/")
-# async def summarize_url(data: Request):
-#     """
-#     Endpoint to receive URL, extract content and return summary
-#     Expects JSON: {"url": "https://example.com"}
-#     """
-#     # Parse request body
-#     request = await data.json()
-
-#     if "url" not in request:
-#         logging.error("URL not provided in request")
-#         raise HTTPException(status_code=400, detail="URL not provided")
-
-#     url = request["url"]
-#     logging.info(f"Received request to summarize URL: {url}")
-
-#     # Extract content using new endpoint
-#     content = await extract_content(url)
-
-#     # Generate summary
-#     summary = await generate_summary(content)
-
-#     # Generate embedding
-#     embedding = await generate_embedding(summary)
-
-#     # Check if URL exists and insert if it doesn't
-#     try:
-#         # Check for existing URL
-#         existing = supabase.table("links").select("id").eq("link", url).execute()
-
-#         if existing.data:
-#             # URL already exists, skip insertion
-#             logging.info(f"URL already exists in database: {url}")
-#             return {"summary": summary}
-
-#         # URL doesn't exist, proceed with insertion
-#         result = supabase.table("links").insert({
-#             "link": url,
-#             "summary": summary,
-#             "vector": embedding
-#         }).execute()
-
-#         if not result.data:
-#             logging.error(f"Failed to insert data into Supabase for URL: {url}")
-#             raise HTTPException(status_code=500, detail="Failed to insert data into Supabase")
-
-#         logging.info(f"Successfully inserted data for URL: {url}, data: {result.data}")
-
-#     except Exception as e:
-#         logging.error(f"Supabase insertion error for URL: {url}, error: {str(e)}")
-#         raise HTTPException(status_code=500, detail=f"Error inserting into database: {str(e)}")
-
-#     return {"summary": summary}
-
 @app.post("/pitch/review/")
 async def review_pitch(request: Request):
     try:
@@ -330,50 +276,6 @@ async def match_investors(request: Request):
     except Exception as e:
         logging.error(f"Investor matching error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
-# @app.post("/cofounder/")
-# async def match_cofounder(request: Request):
-#     try:
-#         data = await request.json()
-#         skills_needed = data.get("skills_needed")
-#         project_description = data.get("project_description")
-#         commitment_level = data.get("commitment_level")
-
-#         if not all([skills_needed, project_description, commitment_level]):
-#             raise HTTPException(status_code=400, detail="All fields required")
-
-#         prompt = f"""Help match co-founders based on:
-#         Project: {project_description}
-#         Skills Needed: {skills_needed}
-#         Commitment Level: {commitment_level}
-
-#         Provide:
-#         1. Ideal co-founder profile
-#         2. Key compatibility factors
-#         3. Recommended experience level
-#         4. Suggested equity split considerations
-#         5. Potential red flags to watch for"""
-
-#         response = model.generate_content(prompt)
-#         matching_analysis = response.text
-
-#         # Store cofounder search
-#         result = supabase.table("cofounder_searches").insert({
-#             "skills_needed": skills_needed,
-#             "project_description": project_description,
-#             "commitment_level": commitment_level,
-#             "matching_analysis": matching_analysis,
-#             "created_at": "now()"
-#         }).execute()
-
-#         return {
-#             "success": True,
-#             "matching_analysis": matching_analysis,
-#             "search_id": result.data[0]["id"]
-#         }
-#     except Exception as e:
-#         logging.error(f"Cofounder matching error: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/strategic_advice/")
 async def get_strategic_advice(request: Request):
