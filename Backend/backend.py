@@ -211,88 +211,28 @@ async def generate_pitch(request: Request):
         logging.error(f"Pitch generation error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/daily_checkin/")
-async def daily_checkin(request: Request):
-    try:
-        data = await request.json()
-        user_id = data.get("user_id")
-        progress = data.get("progress")
-        challenges = data.get("challenges")
-
-        if not all([user_id, progress, challenges]):
-            raise HTTPException(status_code=400, detail="All fields required")
-
-        # Generate AI feedback
-        prompt = f"""Based on the following daily check-in:
-        Progress: {progress}
-        Challenges: {challenges}
-
-        Provide personalized advice and actionable next steps."""
-
-        response = model.generate_content(prompt)
-        ai_feedback = response.text
-
-        # Store check-in
-        result = supabase.table("checkins").insert({
-            "user_id": user_id,
-            "progress": progress,
-            "challenges": challenges,
-            "ai_feedback": ai_feedback,
-            "created_at": "now()"
-        }).execute()
-
-        return {
-            "success": True,
-            "feedback": ai_feedback,
-            "checkin_id": result.data[0]["id"]
-        }
-    except Exception as e:
-        logging.error(f"Daily check-in error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
 @app.post("/validate_idea/")
 async def validate_idea(request: Request):
     try:
         data = await request.json()
+        logging.info(f"Received data: {data}")  # Log the incoming request data
         idea = data.get("idea")
-        market = data.get("market")
-        target_audience = data.get("target_audience")
 
-        if not all([idea, market, target_audience]):
-            raise HTTPException(status_code=400, detail="All fields required")
+        if not idea:
+            raise HTTPException(status_code=400, detail="Business idea is required")
 
-        prompt = f"""Evaluate this business idea:
-        Idea: {idea}
-        Market: {market}
-        Target Audience: {target_audience}
-
-        Provide a detailed analysis covering:
-        1. Market potential
-        2. Feasibility
-        3. Competitive advantage
-        4. Potential challenges
-        5. Recommendations"""
-
+        # Generate validation response using Gemini
+        prompt = f"Validate the following idea: '{idea}'. Provide insights on feasibility, competition, and potential demand."
         response = model.generate_content(prompt)
-        analysis = response.text
-
-        # Store validation
-        result = supabase.table("idea_validations").insert({
-            "idea": idea,
-            "market": market,
-            "target_audience": target_audience,
-            "analysis": analysis,
-            "created_at": "now()"
-        }).execute()
+        analysis = response.text  # Get the validation analysis from Gemini
 
         return {
             "success": True,
             "analysis": analysis,
-            "validation_id": result.data[0]["id"]
         }
     except Exception as e:
         logging.error(f"Idea validation error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # @app.post("/summarize/")
 # async def summarize_url(data: Request):
@@ -410,139 +350,93 @@ async def match_investors(request: Request):
         logging.error(f"Investor matching error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/cofounder/")
-async def match_cofounder(request: Request):
-    try:
-        data = await request.json()
-        skills_needed = data.get("skills_needed")
-        project_description = data.get("project_description")
-        commitment_level = data.get("commitment_level")
+# @app.post("/cofounder/")
+# async def match_cofounder(request: Request):
+#     try:
+#         data = await request.json()
+#         skills_needed = data.get("skills_needed")
+#         project_description = data.get("project_description")
+#         commitment_level = data.get("commitment_level")
 
-        if not all([skills_needed, project_description, commitment_level]):
-            raise HTTPException(status_code=400, detail="All fields required")
+#         if not all([skills_needed, project_description, commitment_level]):
+#             raise HTTPException(status_code=400, detail="All fields required")
 
-        prompt = f"""Help match co-founders based on:
-        Project: {project_description}
-        Skills Needed: {skills_needed}
-        Commitment Level: {commitment_level}
+#         prompt = f"""Help match co-founders based on:
+#         Project: {project_description}
+#         Skills Needed: {skills_needed}
+#         Commitment Level: {commitment_level}
 
-        Provide:
-        1. Ideal co-founder profile
-        2. Key compatibility factors
-        3. Recommended experience level
-        4. Suggested equity split considerations
-        5. Potential red flags to watch for"""
+#         Provide:
+#         1. Ideal co-founder profile
+#         2. Key compatibility factors
+#         3. Recommended experience level
+#         4. Suggested equity split considerations
+#         5. Potential red flags to watch for"""
 
-        response = model.generate_content(prompt)
-        matching_analysis = response.text
+#         response = model.generate_content(prompt)
+#         matching_analysis = response.text
 
-        # Store cofounder search
-        result = supabase.table("cofounder_searches").insert({
-            "skills_needed": skills_needed,
-            "project_description": project_description,
-            "commitment_level": commitment_level,
-            "matching_analysis": matching_analysis,
-            "created_at": "now()"
-        }).execute()
+#         # Store cofounder search
+#         result = supabase.table("cofounder_searches").insert({
+#             "skills_needed": skills_needed,
+#             "project_description": project_description,
+#             "commitment_level": commitment_level,
+#             "matching_analysis": matching_analysis,
+#             "created_at": "now()"
+#         }).execute()
 
-        return {
-            "success": True,
-            "matching_analysis": matching_analysis,
-            "search_id": result.data[0]["id"]
-        }
-    except Exception as e:
-        logging.error(f"Cofounder matching error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+#         return {
+#             "success": True,
+#             "matching_analysis": matching_analysis,
+#             "search_id": result.data[0]["id"]
+#         }
+#     except Exception as e:
+#         logging.error(f"Cofounder matching error: {e}")
+#         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/strategic_advice/")
 async def get_strategic_advice(request: Request):
     try:
         data = await request.json()
-        business_stage = data.get("business_stage")
-        current_challenges = data.get("current_challenges")
-        goals = data.get("goals")
+        business_idea = data.get("business_idea")
 
-        if not all([business_stage, current_challenges, goals]):
-            raise HTTPException(status_code=400, detail="All fields required")
+        if not business_idea:
+            raise HTTPException(status_code=400, detail="Business idea required")
 
-        prompt = f"""Provide strategic advice for:
-        Business Stage: {business_stage}
-        Current Challenges: {current_challenges}
-        Goals: {goals}
-
-        Include:
-        1. Short-term action items
-        2. Long-term strategy recommendations
-        3. Resource allocation advice
-        4. Risk mitigation strategies
-        5. Growth opportunities
-        6. Key metrics to track"""
-
+        # Generate strategic advice using Gemini
+        prompt = f"Provide tailored strategic advice for the business idea '{business_idea}'."
         response = model.generate_content(prompt)
         advice = response.text
-
-        # Store advice
-        result = supabase.table("strategic_advice").insert({
-            "business_stage": business_stage,
-            "current_challenges": current_challenges,
-            "goals": goals,
-            "advice": advice,
-            "created_at": "now()"
-        }).execute()
 
         return {
             "success": True,
             "advice": advice,
-            "advice_id": result.data[0]["id"]
         }
     except Exception as e:
         logging.error(f"Strategic advice error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 @app.post("/scaling/")
 async def get_scaling_advice(request: Request):
     try:
         data = await request.json()
-        current_operations = data.get("current_operations")
-        growth_targets = data.get("growth_targets")
-        resources = data.get("resources")
+        business_idea = data.get("business_idea")
 
-        if not all([current_operations, growth_targets, resources]):
-            raise HTTPException(status_code=400, detail="All fields required")
+        if not business_idea:
+            raise HTTPException(status_code=400, detail="Business idea required")
 
-        prompt = f"""Provide scaling and automation recommendations for:
-        Current Operations: {current_operations}
-        Growth Targets: {growth_targets}
-        Available Resources: {resources}
-
-        Include:
-        1. Process automation opportunities
-        2. Technology stack recommendations
-        3. Resource scaling strategy
-        4. Cost optimization suggestions
-        5. Implementation timeline
-        6. ROI projections"""
-
+        # Generate scaling advice using Gemini
+        prompt = f"Provide a detailed scaling plan for the business idea '{business_idea}'."
         response = model.generate_content(prompt)
         scaling_plan = response.text
-
-        # Store scaling plan
-        result = supabase.table("scaling_plans").insert({
-            "current_operations": current_operations,
-            "growth_targets": growth_targets,
-            "resources": resources,
-            "scaling_plan": scaling_plan,
-            "created_at": "now()"
-        }).execute()
 
         return {
             "success": True,
             "scaling_plan": scaling_plan,
-            "plan_id": result.data[0]["id"]
         }
     except Exception as e:
         logging.error(f"Scaling advice error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
