@@ -17,7 +17,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8000/pitch/generate/', {
+      const response = await fetch('https://pterodactyl-backend.onrender.com/pitch/generate/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8000/pitch/review/', {
+      const response = await fetch('https://pterodactyl-backend.onrender.com/pitch/review/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8000/match_investors/', {
+      const response = await fetch('https://pterodactyl-backend.onrender.com/match_investors/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

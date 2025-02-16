@@ -14,7 +14,7 @@ function Chat() {
             { type: 'user', content: searchQuery }
         ])
 
-        const response = await fetch('http://localhost:8000/ai/', {
+        const response = await fetch('https://pterodactyl-backend.onrender.com/ai/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function Chat() {
             { type: 'user', content: `Validate Idea: ${businessIdea}` }
         ])
 
-        const response = await fetch('http://localhost:8000/validate_idea/', {
+        const response = await fetch('https://pterodactyl-backend.onrender.com/validate_idea/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ function Chat() {
             { type: 'user', content: `Strategic Advice for Idea: ${businessIdea}` }
         ])
 
-        const response = await fetch('http://localhost:8000/strategic_advice/', {
+        const response = await fetch('https://pterodactyl-backend.onrender.com/strategic_advice/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ function Chat() {
             { type: 'user', content: `Scaling Advice for Idea: ${businessIdea}` }
         ])
 
-        const response = await fetch('http://localhost:8000/scaling/', {
+        const response = await fetch('https://pterodactyl-backend.onrender.com/scaling/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
