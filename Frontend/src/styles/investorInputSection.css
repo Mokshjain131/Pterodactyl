@@ -53,10 +53,9 @@
     width: 90%;
     padding: 25px;
     font-size: 20px;
-    text-align: center;
+    text-align: left;
     background: #d62828;
-    border-radius: 10px;
-    font-weight: bold;
+    border-radius: 8px;
   }
   
   .grid-section {
@@ -71,14 +70,13 @@
     padding: 30px; 
     font-size: 20px;
     background: #1a1a1a;
-    text-align: center;
-    border-radius: 10px;
+    text-align: left;
+    border-radius: 8px;
     box-shadow: 0 6px 15px rgba(255, 65, 108, 0.3);
     min-height: 200px; 
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
     width: 35vw;
   }
   #PitchReviewFlexer{
