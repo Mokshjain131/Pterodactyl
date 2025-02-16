@@ -140,6 +140,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
 
       {/* Input for Pitch Review and Investor Matching */}
       <div className="input-pitch-section">
+        <div id="inputpitchtext">
         <input
           type="text"
           placeholder="Enter your pitch for review and matching"
@@ -147,6 +148,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
           onChange={(e) => setInputPitch(e.target.value)}
           className="input-pitch"
         />
+        </div>
         <div className="action-buttons">
           <button
             onClick={reviewPitch}
@@ -164,15 +166,16 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
           </button>
         </div>
       </div>
+      <div id="PitchReviewFlexer">
+        {/* Pitch Review Display */}
+        <div className="pitch-review">
+          {review && <p>{review}</p>}
+        </div>
 
-      {/* Pitch Review Display */}
-      <div className="pitch-review">
-        {review && <p>{review}</p>}
-      </div>
-
-      {/* Investor Matching Display */}
-      <div className="investor-matching">
-        {investorMatches && <p>{investorMatches}</p>}
+        {/* Investor Matching Display */}
+        <div className="investor-matching">
+          {investorMatches && <p>{investorMatches}</p>}
+        </div>
       </div>
     </div>
   );
