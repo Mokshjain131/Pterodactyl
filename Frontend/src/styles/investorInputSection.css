@@ -1,9 +1,8 @@
-
    .investor-input-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px; /* Increased gap for better spacing */
+    gap: 30px;
     padding: 50px;
     background-color: #0d0d0d;
     color: white;
@@ -12,7 +11,6 @@
     margin: 0 auto;
   }
   
-  /* Styling for input sections */
   .input-section, .input-pitch-section{
     width: 90%;
     display: flex;
@@ -28,8 +26,8 @@
 
   #inputpitchtext input{
     width: 100%;
-    padding: 45px; /* Increased padding for bigger input fields */
-    font-size: 18px; /* Larger text */
+    padding: 45px;
+    font-size: 18px; 
     border: 2px solid #ff3131;
     border-radius: 10px;
     background-color: #191919;
@@ -38,8 +36,8 @@
   
   .business-input, .pitch-input {
     width: 100%;
-    padding: 20px; /* Increased padding for bigger input fields */
-    font-size: 18px; /* Larger text */
+    padding: 20px; 
+    font-size: 18px;
     border: 2px solid #ff3131;
     border-radius: 10px;
     background-color: #191919;
@@ -51,10 +49,9 @@
     font-size: 16px;
   }
   
-  /* AI Pitch Section */
   .ai-pitch-section {
     width: 90%;
-    padding: 25px; /* Increased padding */
+    padding: 25px;
     font-size: 20px;
     text-align: center;
     background: #d62828;
@@ -62,7 +59,6 @@
     font-weight: bold;
   }
   
-  /* Grid Section */
   .grid-section {
     display: flex;
     justify-content: space-between;
@@ -72,13 +68,13 @@
   
   .pitch-review, .investor-matching {
     flex: 1;
-    padding: 30px; /* More padding for a larger appearance */
-    font-size: 20px; /* Bigger text */
+    padding: 30px; 
+    font-size: 20px;
     background: #1a1a1a;
     text-align: center;
     border-radius: 10px;
     box-shadow: 0 6px 15px rgba(255, 65, 108, 0.3);
-    min-height: 200px; /* Ensures blocks are taller */
+    min-height: 200px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,7 +87,6 @@
     gap:10px;
   }
 
-  /* Responsive Design for Mobile */
   @media (max-width: 768px) {
     .investor-input-container {
       padding: 30px;

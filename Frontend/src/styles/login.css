@@ -4,7 +4,6 @@
     align-items: center;
     height: 100vh;
     background-color: #f0f2f5;
-    position: relative;
   }
   
   .background {
@@ -31,6 +30,17 @@
     position: relative;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3),
     0px 6px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  .formHeader {
+    background: black; 
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white; 
+    text-align: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   
   .title {
