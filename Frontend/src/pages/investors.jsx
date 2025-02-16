@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import '../styles/investors.css';
+import InvestorInputSection from "../components/InvestorInputSection";
+
 
 function Investors() {
   const services = [
@@ -18,20 +20,7 @@ function Investors() {
           <h1>Fundraising & Investor Support</h1>
           <p>AI-powered tools to help you secure funding and connect with the right investors</p>
         </section>
-
-        <section className="services-section">
-          <div className="container">
-            <h2>How We Help</h2>
-            <div className="services-grid">
-              {services.map(service => (
-                <div key={service.id} className="service-card">
-                  <h3>{service.title}</h3>
-                  <p>{service.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <InvestorInputSection />
       </main>
       <Footer />
     </div>

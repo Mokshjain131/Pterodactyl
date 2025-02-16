@@ -1,0 +1,86 @@
+
+   .investor-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Increased gap for better spacing */
+    padding: 50px;
+    background-color: #0d0d0d;
+    color: white;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Styling for input sections */
+  .input-section {
+    width: 90%;
+  }
+  
+  .business-input, .pitch-input {
+    width: 100%;
+    padding: 20px; /* Increased padding for bigger input fields */
+    font-size: 18px; /* Larger text */
+    border: 2px solid #ff3131;
+    border-radius: 10px;
+    background-color: #191919;
+    color: white;
+  }
+  
+  .business-input::placeholder, .pitch-input::placeholder {
+    color: #888;
+    font-size: 16px;
+  }
+  
+  /* AI Pitch Section */
+  .ai-pitch-section {
+    width: 90%;
+    padding: 25px; /* Increased padding */
+    font-size: 20px;
+    text-align: center;
+    background: #d62828;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+  
+  /* Grid Section */
+  .grid-section {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    gap: 30px;
+  }
+  
+  .pitch-review, .investor-matching {
+    flex: 1;
+    padding: 30px; /* More padding for a larger appearance */
+    font-size: 20px; /* Bigger text */
+    background: #1a1a1a;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(255, 65, 108, 0.3);
+    min-height: 200px; /* Ensures blocks are taller */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  /* Responsive Design for Mobile */
+  @media (max-width: 768px) {
+    .investor-input-container {
+      padding: 30px;
+    }
+  
+    .input-section,
+    .ai-pitch-section,
+    .grid-section {
+      width: 100%;
+    }
+  
+    .grid-section {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  
