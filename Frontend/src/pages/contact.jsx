@@ -23,6 +23,7 @@ function Contact() {
             <div className="contact-grid">
               <div className="contact-form-container">
                 <h2>Find Us</h2>
+                <center>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.969905363581!2d72.83472147520622!3d19.108976132102352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9b888ae67fd%3A0xe0b9538d623ac5d2!2sMukesh%20Patel%20School%20of%20Technology%20Management%20%26%20Engineering%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1739656725307!5m2!1sen!2sin"
                   width="540"
@@ -36,6 +37,7 @@ function Contact() {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
+                </center>
               </div>
 
               <div className="contact-info">
