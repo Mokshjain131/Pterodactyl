@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Correct import
+import { useNavigate } from "react-router-dom"; 
 import "../styles/login.css";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
@@ -9,7 +9,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const navigate = useNavigate(); // ✅ Replacing useRouter with useNavigate
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();

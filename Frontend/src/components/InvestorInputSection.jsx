@@ -115,7 +115,6 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
 
   return (
     <div className="investor-input-container">
-      {/* Input Business Idea */}
       <div className="input-section">
         <input
           type="text"
@@ -132,13 +131,9 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
           {loading ? 'Generating...' : 'Generate Pitch'}
         </button>
       </div>
-
-      {/* AI Generated Pitch Display */}
       <div className="ai-pitch-section">
         {pitch && <p>{pitch}</p>}
       </div>
-
-      {/* Input for Pitch Review and Investor Matching */}
       <div className="input-pitch-section">
         <div id="inputpitchtext">
         <input
@@ -167,12 +162,9 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
         </div>
       </div>
       <div id="PitchReviewFlexer">
-        {/* Pitch Review Display */}
         <div className="pitch-review">
           {review && <p>{review}</p>}
         </div>
-
-        {/* Investor Matching Display */}
         <div className="investor-matching">
           {investorMatches && <p>{investorMatches}</p>}
         </div>

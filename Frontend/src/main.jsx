@@ -8,9 +8,9 @@ import Index from "./pages/index";
 import About from "./pages/about";
 import Features from "./pages/features";
 import Contact from "./pages/contact";
-import Investors from "./pages/investors";  // Import Investors page
-import Chat from "./pages/chat";       // Import Chat Page
-import CoFounder from "./pages/cofounder";  // Import Co-founder Page
+import Investors from "./pages/investors"; 
+import Chat from "./pages/chat";      
+import CoFounder from "./pages/cofounder"; 
 import Login from "./pages/login";
 
 createRoot(document.getElementById('root')).render(

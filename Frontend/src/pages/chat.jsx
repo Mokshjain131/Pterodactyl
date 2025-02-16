@@ -9,7 +9,6 @@ function Chat() {
     const [businessIdea, setBusinessIdea] = useState('')
 
     async function fetchLinks() {
-        // Add user query immediately
         setMessages(prev => [
             ...prev,
             { type: 'user', content: searchQuery }
@@ -27,12 +26,11 @@ function Chat() {
         })
         const data = await response.json()
         
-        // Add only the response to messages
         if (data.success) {
-            const cleanedResponse = data.response.replace(/\*/g, ''); // Remove all '*' characters
+            const cleanedResponse = data.response.replace(/\*/g, '');
             setMessages(prev => [
                 ...prev,
-                { type: 'assistant', content: cleanedResponse } // Only display the cleaned response
+                { type: 'assistant', content: cleanedResponse } 
             ])
         } else {
             setMessages(prev => [
@@ -40,7 +38,7 @@ function Chat() {
                 { type: 'assistant', content: "An error occurred while fetching the response." }
             ])
         }
-        setSearchQuery('') // Clear input after sending
+        setSearchQuery('') 
     }
 
     async function validateIdea() {
@@ -56,17 +54,17 @@ function Chat() {
             },
             body: JSON.stringify({
                 idea: businessIdea,
-                market: searchQuery, // Assuming market is taken from searchQuery
-                target_audience: 'General' // Placeholder, adjust as needed
+                market: searchQuery, 
+                target_audience: 'General' 
             })
         })
         const data = await response.json()
-        const cleanedAnalysis = data.analysis.replace(/\*/g, ''); // Remove all '*' characters
+        const cleanedAnalysis = data.analysis.replace(/\*/g, ''); 
         setMessages(prev => [
             ...prev,
             { type: 'assistant', content: cleanedAnalysis }
         ])
-        setBusinessIdea('') // Clear input after sending
+        setBusinessIdea('') 
     }
 
     async function getStrategicAdvice() {
@@ -81,19 +79,19 @@ function Chat() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                business_stage: 'N/A', // Placeholder, adjust as needed
-                current_challenges: 'N/A', // Placeholder, adjust as needed
-                goals: 'N/A', // Placeholder, adjust as needed
+                business_stage: 'N/A',
+                current_challenges: 'N/A', 
+                goals: 'N/A', 
                 business_idea: businessIdea
             })
         })
         const data = await response.json()
-        const cleanedAdvice = data.advice.replace(/\*/g, ''); // Remove all '*' characters
+        const cleanedAdvice = data.advice.replace(/\*/g, ''); 
         setMessages(prev => [
             ...prev,
             { type: 'assistant', content: cleanedAdvice }
         ])
-        setBusinessIdea('') // Clear input after sending
+        setBusinessIdea('') 
     }
 
     async function getScalingAdvice() {
@@ -108,26 +106,25 @@ function Chat() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                current_operations: 'N/A', // Placeholder, adjust as needed
-                growth_targets: 'N/A', // Placeholder, adjust as needed
-                resources: 'N/A', // Placeholder, adjust as needed
+                current_operations: 'N/A',
+                growth_targets: 'N/A', 
+                resources: 'N/A',
                 business_idea: businessIdea
             })
         })
         const data = await response.json()
-        const cleanedScalingPlan = data.scaling_plan.replace(/\*/g, ''); // Remove all '*' characters
+        const cleanedScalingPlan = data.scaling_plan.replace(/\*/g, ''); 
         setMessages(prev => [
             ...prev,
             { type: 'assistant', content: cleanedScalingPlan }
         ])
-        setBusinessIdea('') // Clear input after sending
+        setBusinessIdea('') 
     }
 
     return (
         <div className="chat-container">
             <Navbar />
             <div className="chat-content">
-                {/* Chat messages display field */}
                 <div className="messages-container">
                     {messages.map((message, index) => (
                         <div key={index} className={`message ${message.type}`}>
@@ -144,7 +141,6 @@ function Chat() {
                     ))}
                 </div>
                 <div id="ColumnFlexer">
-                    {/* General Purpose Input */}
                     <div className="input-container">
                     <div id="GeneralPurposeFlex">
                     <h3>General-Utility:</h3>
@@ -168,7 +164,6 @@ function Chat() {
                         </button>
                     </div>
 
-                    {/* Business Idea input and buttons */}
                     <div className="input-container">
                         <div id="GeneralPurposeFlex">
                         <h3>Business Idea Input:</h3>
