@@ -11,13 +11,9 @@ const Navbar = () => {
       <div className="navbar-logo">
       <img src={logo} alt="StartupAI Logo" className="logo-image" />
       </div>
-
-      {/* Hamburger Menu */}
       <div className="navbar-menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
         &#9776;
       </div>
-
-      {/* Navigation Links */}
       <ul className={`navbar-links ${menuOpen ? "navbar-links-active" : ""}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About</Link></li>
