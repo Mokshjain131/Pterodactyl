@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import '../styles/chat.css'
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";

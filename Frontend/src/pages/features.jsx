@@ -1,8 +1,8 @@
-// import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import '../styles/features.css';
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const featuresLeft = [
     {
