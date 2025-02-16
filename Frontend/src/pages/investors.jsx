@@ -35,10 +35,10 @@ function Investors() {
           <h1>Fundraising & Investor Support</h1>
           <p>AI-powered tools to help you secure funding and connect with the right investors</p>
         </section>
-        <InvestorInputSection 
-          onPitchGenerated={handlePitchGenerated} 
-          onReviewReceived={handleReviewReceived} 
-          onInvestorMatches={handleInvestorMatches} 
+        <InvestorInputSection
+          onPitchGenerated={handlePitchGenerated}
+          onReviewReceived={handleReviewReceived}
+          onInvestorMatches={handleInvestorMatches}
         />
       </main>
       <Footer />
