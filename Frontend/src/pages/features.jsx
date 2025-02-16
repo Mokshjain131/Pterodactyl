@@ -49,7 +49,7 @@ const SlidingCards = () => {
     return (
       <div>
         <Navbar />
-        <section className="about-hero">
+        <section className="about-feature">
           <h1>Unlocking Startup Potential</h1>
           <p>AI-powered solutions to guide solo founders from idea to execution.</p>
         </section>

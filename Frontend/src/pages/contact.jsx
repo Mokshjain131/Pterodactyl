@@ -42,7 +42,6 @@ function Contact() {
                 <h2>Contact Information</h2>
                 <div className="info-items">
                   <div className="info-item">
-                    <span className="icon">📧</span>
                     <div>
                       <h3>Email</h3>
                       <p>support@startupai.com</p>
@@ -50,7 +49,6 @@ function Contact() {
                   </div>
                   
                   <div className="info-item">
-                    <span className="icon">📱</span>
                     <div>
                       <h3>Phone</h3>
                       <p>(555) 123-4567</p>
@@ -58,7 +56,6 @@ function Contact() {
                   </div>
                   
                   <div className="info-item">
-                    <span className="icon">⏰</span>
                     <div>
                       <h3>Hours</h3>
                       <p>Monday - Friday: 9AM - 6PM</p>

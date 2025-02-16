@@ -36,9 +36,8 @@ const About = () => {
 
         
         <section className="how-it-works">
-        
-          <div className="container">
-            <h2>How AI Supports Your Journey</h2>
+          {/* <div className="container"> */}
+          <h2>How AI Supports Your Journey</h2>
             <div className="support-grid">
               {[
                 {
@@ -71,7 +70,7 @@ const About = () => {
                 </div>
               ))}
             </div>
-          </div>
+          {/* </div> */}
         
         </section>
         
@@ -82,3 +81,6 @@ const About = () => {
 };
 
 export default About;
+
+
+

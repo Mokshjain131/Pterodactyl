@@ -6,8 +6,17 @@
   padding: 6rem 2rem;
   text-align: center;
   position: relative;
-  margin-bottom: 170px;
 }
+
+.about-hero h1 {
+  font-size: 2rem; /* Adjust as needed */
+  font-weight: bold;
+}
+
+.about-hero p {
+  font-size: 1rem; /* Adjust as needed */
+}
+
 
 .how-it-works {
   display: flex;
@@ -15,9 +24,18 @@
   align-items: center;
   padding: 50px 20px;
   padding-left: 95px;
-  padding-bottom: 150px;
+  padding-bottom: 70px;
   background-color: transparent !important; 
 }
+
+.how-it-works h2 {
+  font-size: 2rem; /* Adjust size */
+  font-weight: bold;
+  text-align: center;
+  color: #333; /* Change color */
+  margin-bottom: 50px;
+}
+
 
 .container {
   background-color: transparent !important;
@@ -28,7 +46,6 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding-bottom: 70px;
 }
 
 .support-item {
