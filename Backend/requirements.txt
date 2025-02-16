@@ -1,7 +1,8 @@
 fastapi
 uvicorn
-supabase
 python-dotenv
 google-generativeai
-firecrawl-py
+supabase
+firecrawl
+numpy
 faiss-cpu
