@@ -1,4 +1,4 @@
-  .container {
+  .containerLogin {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +53,7 @@
   }
   
   .button {
-    background-color: #1877f2;
+    background-color: #ff4b5c;
     color: white;
     padding: 0.75rem;
     border: none;
@@ -64,7 +64,7 @@
   }
   
   .button:hover {
-    background-color: #166fe5;
+    background-color: #f8394c;
   }
   
   .toggleText {
@@ -74,13 +74,13 @@
   }
   
   .toggleLink {
-    color: #1877f2;
+    color: #ff4b5c;
     cursor: pointer;
     text-decoration: underline;
   }
   
   .toggleLink:hover {
-    color: #166fe5;
+    color: #f8394c;
   }
   
   

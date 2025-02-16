@@ -143,56 +143,61 @@ function Chat() {
                         </div>
                     ))}
                 </div>
+                <div id="ColumnFlexer">
+                    {/* General Purpose Input */}
+                    <div className="input-container">
+                    <div id="GeneralPurposeFlex">
+                    <h3>General-Utility:</h3>
+                    </div>
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && searchQuery.trim()) {
+                                    fetchLinks();
+                                }
+                            }}
+                            placeholder="Search..."
+                        />
+                        <button
+                            onClick={fetchLinks}
+                            disabled={!searchQuery.trim()}
+                        >
+                            Search
+                        </button>
+                    </div>
 
-                {/* General Purpose Input */}
-                <h2>General Purpose</h2>
-                <div className="input-container">
-                    <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' && searchQuery.trim()) {
-                                fetchLinks();
-                            }
-                        }}
-                        placeholder="Search..."
-                    />
-                    <button
-                        onClick={fetchLinks}
-                        disabled={!searchQuery.trim()}
-                    >
-                        Search
-                    </button>
-                </div>
-
-                {/* Business Idea input and buttons */}
-                <h2>Business Idea Input</h2>
-                <div className="input-container">
-                    <input
-                        type="text"
-                        value={businessIdea}
-                        onChange={(e) => setBusinessIdea(e.target.value)}
-                        placeholder="Enter your business idea..."
-                    />
-                    <button
-                        onClick={validateIdea}
-                        disabled={!businessIdea.trim()}
-                    >
-                        Validate Idea
-                    </button>
-                    <button
-                        onClick={getStrategicAdvice}
-                        disabled={!businessIdea.trim()}
-                    >
-                        Get Strategic Advice
-                    </button>
-                    <button
-                        onClick={getScalingAdvice}
-                        disabled={!businessIdea.trim()}
-                    >
-                        Get Scaling Advice
-                    </button>
+                    {/* Business Idea input and buttons */}
+                    <div className="input-container">
+                        <div id="GeneralPurposeFlex">
+                        <h3>Business Idea Input:</h3>
+                        </div>
+                        <input
+                            type="text"
+                            value={businessIdea}
+                            onChange={(e) => setBusinessIdea(e.target.value)}
+                            placeholder="Enter your business idea..."
+                        />
+                        <button
+                            onClick={validateIdea}
+                            disabled={!businessIdea.trim()}
+                        >
+                            Validate Idea
+                        </button>
+                        <button
+                            onClick={getStrategicAdvice}
+                            disabled={!businessIdea.trim()}
+                        >
+                            Get Strategic Advice
+                        </button>
+                        <button
+                            onClick={getScalingAdvice}
+                            disabled={!businessIdea.trim()}
+                        >
+                            Get Scaling Advice
+                        </button>
+                    </div>
                 </div>
             </div>
             <Footer />

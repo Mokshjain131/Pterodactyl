@@ -23,7 +23,7 @@ function Login() {
   return (
     <div>
       <Navbar />
-    <div className="container">
+    <div className="containerLogin">
       <div className="background"></div>
       <div className="formContainer">
         <h1 className="title">{isLogin ? "Login" : "Sign Up"}</h1>
