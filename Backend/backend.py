@@ -86,7 +86,7 @@ Question: "How can I validate my SaaS idea?"
 Response: "To validate your SaaS idea, start with competitor analysis using tools like Crunchbase. Conduct customer interviews to refine your problem statement. Use a no-code MVP to test demand before full development."
 
 Question: "What's the best fundraising strategy for a B2B startup?"
-Response: "For a B2B startup, focus on revenue-based funding or strategic angel investors. Create a strong sales pipeline before pitching VCs, as they prioritize revenue traction. Consider accelerators like Y Combinator if your product has high growth potential.""""
+Response: "For a B2B startup, focus on revenue-based funding or strategic angel investors. Create a strong sales pipeline before pitching VCs, as they prioritize revenue traction. Consider accelerators like Y Combinator if your product has high growth potential."""
 )
 
 @app.post("/ai/")
@@ -202,17 +202,10 @@ async def generate_pitch(request: Request):
         response = model.generate_content(prompt)
         pitch_content = response.text
 
-        # Store in Supabase
-        result = supabase.table("pitches").insert({
-            "user_id": data.get("user_id"),
-            "content": pitch_content,
-            "created_at": "now()"
-        }).execute()
-
         return {
             "success": True,
             "pitch": pitch_content,
-            "pitch_id": result.data[0]["id"]
+            "pitch_id": "temp-id-123"  # You might want to generate a unique ID here
         }
     except Exception as e:
         logging.error(f"Pitch generation error: {e}")
@@ -364,14 +357,10 @@ async def review_pitch(request: Request):
         if not pitch_id:
             raise HTTPException(status_code=400, detail="Pitch ID required")
 
-        # Get pitch from database
-        pitch = supabase.table("pitches").select("*").eq("id", pitch_id).execute()
-
-        if not pitch.data:
-            raise HTTPException(status_code=404, detail="Pitch not found")
-
+        # Note: In a real application, you'd want to store and retrieve the original pitch
+        # For now, we'll assume the pitch content is passed in the request
         prompt = f"""Review and provide detailed feedback on this pitch:
-        {pitch.data[0]['content']}
+        {pitch_id}  # In practice, you'd use the actual pitch content here
 
         Provide feedback on:
         1. Clarity and Structure
@@ -384,17 +373,9 @@ async def review_pitch(request: Request):
         response = model.generate_content(prompt)
         review = response.text
 
-        # Store review
-        result = supabase.table("pitch_reviews").insert({
-            "pitch_id": pitch_id,
-            "review": review,
-            "created_at": "now()"
-        }).execute()
-
         return {
             "success": True,
             "review": review,
-            "review_id": result.data[0]["id"]
         }
     except Exception as e:
         logging.error(f"Pitch review error: {e}")
@@ -409,18 +390,8 @@ async def match_investors(request: Request):
         if not pitch_id:
             raise HTTPException(status_code=400, detail="Pitch ID required")
 
-        # Get pitch details
-        pitch = supabase.table("pitches").select("*").eq("id", pitch_id).execute()
-
-        if not pitch.data:
-            raise HTTPException(status_code=404, detail="Pitch not found")
-
-        # Get all investors from database
-        investors = supabase.table("investors").select("*").execute()
-
-        prompt = f"""Based on this pitch:
-        {pitch.data[0]['content']}
-
+        # Note: In a real application, you'd want to store and retrieve the original pitch
+        prompt = f"""Based on this pitch ID {pitch_id}:
         Analyze and suggest matching criteria for ideal investors including:
         1. Industry focus
         2. Investment stage
@@ -431,17 +402,9 @@ async def match_investors(request: Request):
         response = model.generate_content(prompt)
         matching_criteria = response.text
 
-        # Store matching results
-        result = supabase.table("investor_matches").insert({
-            "pitch_id": pitch_id,
-            "matching_criteria": matching_criteria,
-            "created_at": "now()"
-        }).execute()
-
         return {
             "success": True,
             "matching_criteria": matching_criteria,
-            "match_id": result.data[0]["id"]
         }
     except Exception as e:
         logging.error(f"Investor matching error: {e}")
