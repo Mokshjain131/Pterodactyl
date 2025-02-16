@@ -13,11 +13,39 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulated API call
     console.log(isLogin ? "Logging in..." : "Signing up...", { email, password, name });
 
-    // ✅ Correct navigation method for React Router
-    navigate("/");
+    // Set the URL to /signup/ when signing up
+    const url = isLogin ? "/login/" : "/signup/";
+    const body = isLogin ? { email, password } : { email, password, name };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      // Handle successful login/signup
+      if (data.success) {
+        // Redirect to home or another page
+        navigate("/");
+      } else {
+        // Handle error (e.g., show a message)
+        console.error(data.detail);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
