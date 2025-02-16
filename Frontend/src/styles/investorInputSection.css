@@ -24,7 +24,7 @@
     flex:80;
   }
 
-  #inputpitchtext input{
+  #inputpitchtext textarea{
     width: 100%;
     padding: 45px;
     font-size: 18px; 

@@ -136,7 +136,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
       </div>
       <div className="input-pitch-section">
         <div id="inputpitchtext">
-        <input
+        <textarea
           type="text"
           placeholder="Enter your pitch for review and matching"
           value={inputPitch}
