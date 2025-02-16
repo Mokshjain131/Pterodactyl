@@ -7,12 +7,6 @@ function Chat() {
     const [searchQuery, setSearchQuery] = useState('')
     const [messages, setMessages] = useState([])
     const [businessIdea, setBusinessIdea] = useState('')
-    const [businessStage, setBusinessStage] = useState('')
-    const [currentChallenges, setCurrentChallenges] = useState('')
-    const [goals, setGoals] = useState('')
-    const [currentOperations, setCurrentOperations] = useState('')
-    const [growthTargets, setGrowthTargets] = useState('')
-    const [resources, setResources] = useState('')
 
     async function fetchLinks() {
         // Add user query immediately
