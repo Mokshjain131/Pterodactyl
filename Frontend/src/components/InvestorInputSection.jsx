@@ -115,6 +115,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
 
   return (
     <div className="investor-input-container">
+      <h4 id="InvestorTitleText">Generating Pitch</h4>
       <div className="input-section">
         <input
           type="text"
@@ -134,6 +135,7 @@ function InvestorInputSection({ onPitchGenerated, onReviewReceived, onInvestorMa
       <div className="ai-pitch-section">
         {pitch && <p>{pitch}</p>}
       </div>
+      <h4 id="InvestorTitleText">Evaluating Pitch</h4>
       <div className="input-pitch-section">
         <div id="inputpitchtext">
         <textarea

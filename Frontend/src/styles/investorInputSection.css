@@ -32,6 +32,7 @@
     border-radius: 10px;
     background-color: #191919;
     color: white;
+    box-shadow: 0 6px 15px rgba(255, 65, 108, 0.3);
   }
   
   .business-input, .pitch-input {
@@ -42,6 +43,7 @@
     border-radius: 10px;
     background-color: #191919;
     color: white;
+    box-shadow: 0 6px 15px rgba(255, 65, 108, 0.3);
   }
   
   .business-input::placeholder, .pitch-input::placeholder {
@@ -58,6 +60,12 @@
     border-radius: 8px;
   }
   
+  #InvestorTitleText{
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+  }
+
   .grid-section {
     display: flex;
     justify-content: space-between;
@@ -118,8 +126,7 @@
     cursor: pointer;
     transition: background-color 0.2s;
     width: 10rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3),
-    0px 6px 20px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 15px rgba(255, 65, 108, 0.3);
 }
 
 .action-buttons button:hover, .input-section button:hover {
