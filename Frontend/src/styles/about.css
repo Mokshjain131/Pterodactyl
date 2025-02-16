@@ -9,12 +9,12 @@
 }
 
 .about-hero h1 {
-  font-size: 2rem; /* Adjust as needed */
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .about-hero p {
-  font-size: 1rem; /* Adjust as needed */
+  font-size: 1rem;
 }
 
 
@@ -29,10 +29,10 @@
 }
 
 .how-it-works h2 {
-  font-size: 2rem; /* Adjust size */
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  color: #333; /* Change color */
+  color: #333; 
   margin-bottom: 50px;
 }
 
@@ -54,12 +54,11 @@
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0; /* Initially hidden */
+  opacity: 0;
   transform: translateX(-100px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* Alternating positions */
 .support-item:nth-child(even) {
   align-self: flex-end;
   transform: translateX(100px);

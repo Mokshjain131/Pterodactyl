@@ -14,7 +14,7 @@
 .messages-container {
     flex: 1;
     overflow-y: auto;
-    max-height: calc(100vh - 200px); /* Adjust this value based on your navbar and footer height */
+    max-height: calc(100vh - 200px); 
     padding: 20px;
     display: flex;
     flex-direction: column;
