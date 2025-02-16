@@ -36,6 +36,7 @@ function Chat() {
     return (
         <div className="chat-container">
             <Navbar />
+            <h2>General Purpose</h2>
             <div className="chat-content">
                 {/* Chat messages */}
                 <div className="messages-container">
@@ -77,6 +78,97 @@ function Chat() {
                         Search
                     </button>
                 </div>
+            </div>
+            <h2>Enter your Business Idea:</h2>
+            <div className="chat-content">
+                {/* Search input and button */}
+                <div className="input-container">
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && searchQuery.trim()) {
+                                fetchLinks();
+                            }
+                        }}
+                        placeholder="Search..."
+                    />
+                    <button
+                        onClick={fetchLinks}
+                        disabled={!searchQuery.trim()}
+                    >
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div className='ChatFlexer'>
+            <div className="chat-content">
+                <h3>Idea Validation</h3>
+                {/* Chat messages */}
+                <div className="messages-container">
+                    {messages.map((message, index) => (
+                    <div
+                        key={index}
+                        className={`message ${message.type}`}
+                    >
+                        <div className="message-content">
+                        {message.type === 'user' ? (
+                            message.content
+                        ) : (
+                            <pre>
+                            {JSON.stringify(message.content.response, null, 2)}
+                            </pre>
+                        )}
+                        </div>
+                    </div>
+                    ))}
+                </div>
+            </div>
+            <div className="chat-content">
+                <h3>Strategic Analysis</h3>
+                {/* Chat messages */}
+                <div className="messages-container">
+                    {messages.map((message, index) => (
+                    <div
+                        key={index}
+                        className={`message ${message.type}`}
+                    >
+                        <div className="message-content">
+                        {message.type === 'user' ? (
+                            message.content
+                        ) : (
+                            <pre>
+                            {JSON.stringify(message.content.response, null, 2)}
+                            </pre>
+                        )}
+                        </div>
+                    </div>
+                    ))}
+                </div>
+            </div>
+            <div className="chat-content">
+                <h3>Scaling</h3>
+                {/* Chat messages */}
+                <div className="messages-container">
+                    {messages.map((message, index) => (
+                    <div
+                        key={index}
+                        className={`message ${message.type}`}
+                    >
+                        <div className="message-content">
+                        {message.type === 'user' ? (
+                            message.content
+                        ) : (
+                            <pre>
+                            {JSON.stringify(message.content.response, null, 2)}
+                            </pre>
+                        )}
+                        </div>
+                    </div>
+                    ))}
+                </div>
+            </div>
             </div>
             <Footer />
         </div>
