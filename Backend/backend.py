@@ -13,9 +13,11 @@ import numpy as np
 import json
 import faiss
 
+# Boilerplate. Load envs, load fastapi app, firecrawl, and configure gemini, supabase
 load_dotenv()
 app = FastAPI()
 
+# Configure CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allows all origins
@@ -30,7 +32,10 @@ supabase_url = os.getenv("SUPABASE_URL")
 supabase_key = os.getenv("SUPABASE_ANON_KEY")
 supabase: Client = create_client(supabase_url, supabase_key)
 
+# Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# 2024-03-20 10:30:45,123 - INFO - Successfully generated summary
+# 2024-03-20 10:30:46,456 - ERROR - Failed to fetch content from URL
 
 @app.get("/status/")
 async def status():
@@ -45,7 +50,7 @@ generation_config = {
 }
 
 model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash-exp",
+    model_name="gemini-2.0-flash-exp",  # Using experimental model for best results. Use 1.5 flash if this ever goes out of public access
     generation_config=generation_config,
     system_instruction= """You are Gemini, a highly capable AI assistant created by Google. Your role is to help users by:
 
@@ -87,14 +92,17 @@ model = genai.GenerativeModel(
 @app.post("/ai/")
 async def search(userquery: Request):
     try:
+        # Parse the incoming request
         request = await userquery.json()
         query_text = request.get("query")
 
         if not query_text:
             raise HTTPException(status_code=400, detail="Query text is required")
 
+        # Generate response using Gemini
         response = model.generate_content(query_text)
 
+        # Return the response in a structured format
         return {
             "success": True,
             "response": response.text,
@@ -114,16 +122,20 @@ async def login(request: Request):
         if not id_token:
             raise HTTPException(status_code=400, detail="ID token required")
 
+        # Verify Google token with Supabase
         auth_response = supabase.auth.sign_in_with_id_token({
             "provider": "google",
             "id_token": id_token
         })
 
+        # Get user data
         user = auth_response.user
 
+        # Check if user exists in our users table
         result = supabase.table("users").select("*").eq("id", user.id).execute()
 
         if not result.data:
+            # Create new user entry if first time
             result = supabase.table("users").insert({
                 "id": user.id,
                 "email": user.email,
@@ -151,6 +163,7 @@ async def refresh_session(request: Request):
         if not refresh_token:
             raise HTTPException(status_code=400, detail="Refresh token required")
 
+        # Refresh the session
         auth_response = supabase.auth.refresh_session(refresh_token)
 
         return {
@@ -191,7 +204,7 @@ async def generate_pitch(request: Request):
         return {
             "success": True,
             "pitch": pitch_content,
-            "pitch_id": "temp-id-123" 
+            "pitch_id": "temp-id-123"  # You might want to generate a unique ID here
         }
     except Exception as e:
         logging.error(f"Pitch generation error: {e}")
@@ -201,15 +214,16 @@ async def generate_pitch(request: Request):
 async def validate_idea(request: Request):
     try:
         data = await request.json()
-        logging.info(f"Received data: {data}") 
+        logging.info(f"Received data: {data}")  # Log the incoming request data
         idea = data.get("idea")
 
         if not idea:
             raise HTTPException(status_code=400, detail="Business idea is required")
 
+        # Generate validation response using Gemini
         prompt = f"Validate the following idea: '{idea}'. Provide insights on feasibility, competition, and potential demand."
         response = model.generate_content(prompt)
-        analysis = response.text 
+        analysis = response.text  # Get the validation analysis from Gemini
 
         return {
             "success": True,
@@ -228,6 +242,7 @@ async def review_pitch(request: Request):
         if not pitch_content:
             raise HTTPException(status_code=400, detail="Pitch content required")
 
+        # Generate review for the pitch
         prompt = f"Review and provide detailed feedback on this pitch: {pitch_content} MAKE SURE THE RESPONSE IS 200 WORDS OR LESSER, IT CANNOT EXCEED 200 WORDS AT ALL IT IS ABSOLUTELY IMPORTANT THAT IT IS LESS THAN 200 WORDS don't mention keeping it under 200 words in the response"
         response = model.generate_content(prompt)
         review = response.text
@@ -249,6 +264,7 @@ async def match_investors(request: Request):
         if not pitch_content:
             raise HTTPException(status_code=400, detail="Pitch content required")
 
+        # Generate investor matchmaking tips based on the pitch
         prompt = f"Based on this pitch content: {pitch_content}, suggest ideal investors including their industry focus, investment stage, typical check size, geographic preferences, and key value-adds needed. (the response should be 200 words or less) dont exceed that limit,MAKE SURE THE RESPONSE IS 200 WORDS OR LESSER, IT CANNOT EXCEED 200 WORDS AT ALL IT IS ABSOLUTELY IMPORTANT THAT IT IS LESS THAN 200 WORDS don't mention keeping it under 200 words in the response"
         response = model.generate_content(prompt)
         matching_criteria = response.text
@@ -270,6 +286,7 @@ async def get_strategic_advice(request: Request):
         if not business_idea:
             raise HTTPException(status_code=400, detail="Business idea required")
 
+        # Generate strategic advice using Gemini
         prompt = f"Provide tailored strategic advice for the business idea '{business_idea}'."
         response = model.generate_content(prompt)
         advice = response.text
@@ -291,6 +308,7 @@ async def get_scaling_advice(request: Request):
         if not business_idea:
             raise HTTPException(status_code=400, detail="Business idea required")
 
+        # Generate scaling advice using Gemini
         prompt = f"Provide a detailed scaling plan for the business idea '{business_idea}'."
         response = model.generate_content(prompt)
         scaling_plan = response.text
