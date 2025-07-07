@@ -21,12 +21,12 @@
 }
 
 .about-feature h1 {
-  font-size: 2rem; /* Adjust as needed */
+  font-size: 2rem; 
   font-weight: bold;
 }
 
 .about-feature p {
-  font-size: 1rem; /* Adjust as needed */
+  font-size: 1rem;
 }
 
 
@@ -43,7 +43,6 @@
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Left slide-in */
 .cardL {
   transform: translateX(-50px);
 }
@@ -54,12 +53,12 @@
   font-weight: bold;
   margin: 5px;
 }
-/* Right slide-in */
+
 .cardR {
   transform: translateX(50px);
 }
 
-/* Apply visible class */
+
 .cardL.visible, .cardR.visible {
   opacity: 1;
   transform: translateX(0);
